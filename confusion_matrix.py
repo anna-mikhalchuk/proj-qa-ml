@@ -1,5 +1,8 @@
 import json
 from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+from multi_lable_confusionMatrix import labels
 
 # Read data from JSON file
 with open('merged.json', 'r') as f:
@@ -21,3 +24,14 @@ cm = confusion_matrix(y_true, y_pred, labels=classes)
 # Print the confusion matrix
 print("Confusion Matrix:")
 print(cm)
+
+# Compute confusion matrix
+cm = confusion_matrix(y_true, y_pred, labels=labels)
+
+# Plot confusion matrix
+plt.figure(figsize=(10, 8))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+plt.xlabel('Predicted Labels')
+plt.ylabel('True Labels')
+plt.title('Confusion Matrix')
+plt.show()
