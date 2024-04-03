@@ -1,9 +1,7 @@
 import math
 import json
 from sklearn.metrics import multilabel_confusion_matrix
-import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
-import seaborn as sns
+
 
 # Read data from JSON file
 with open('merged.json', 'r') as f:
@@ -78,14 +76,3 @@ mcc = (arg_tp * arg_tn - arg_fp * arg_fn) / math.sqrt((arg_tp + arg_fp)
                                                       * (arg_tp + arg_fn) * (arg_tn + arg_fp)
                                                       * (arg_tn + arg_fn))
 print("Aggregated Matthews Correlation Coefficient (MCC):", mcc)
-
-# Compute confusion matrix
-cm = confusion_matrix(y_true, y_pred, labels=labels)
-
-# Plot confusion matrix
-plt.figure(figsize=(10, 8))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
-plt.xlabel('Predicted Labels')
-plt.ylabel('True Labels')
-plt.title('Confusion Matrix')
-plt.show()
